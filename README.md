@@ -38,16 +38,23 @@ Each screen supports navigation and user input using **Flutter**, **GetX**, and 
  -  3rd page - ![image](https://github.com/user-attachments/assets/9b327017-2778-490e-80cf-9203cf43bd03)
  -  4rth page - ![image](https://github.com/user-attachments/assets/041d94d7-75f2-4ad7-b874-a8e9f4ffa8e7)
 (note : - **next page** text is removable by clicking you can navigate to next pages )
-- 5th page - ![image](https://github.com/user-attachments/assets/f6c1d8f6-8ad0-4586-82f0-33920f96df75)
-- 6th page - ![image](https://github.com/user-attachments/assets/a431b092-7794-4593-8ea8-8d983aa3552a)
--![image](https://github.com/user-attachments/assets/b37a2d82-75de-4853-9ac1-516ceeae59dc)
+- 5th page - ![image](https://github.com/user-attachments/assets/6bd911dc-fd6d-43dd-834b-60e68ccd445e)
 
-- 7th page - ![image](https://github.com/user-attachments/assets/e78cf178-26c9-49de-bd96-f8de974b4f39)
-- 8th page - ![image](https://github.com/user-attachments/assets/733747a7-ea63-42db-93db-55a1b7c21015)
-- 9th page - ![image](https://github.com/user-attachments/assets/3da635e7-9b55-4ef6-840b-73389cbbe413)
-- 10th page - ![image](https://github.com/user-attachments/assets/dce2d7b2-a500-4aa7-9dd8-71dd31ba4e43)
-- 11th page - ![image](https://github.com/user-attachments/assets/cfb9f730-27b3-420b-b8e3-7b714f9e3f5c)
-- 12th page - ![image](https://github.com/user-attachments/assets/2aa5c145-6505-4b59-9c1f-893f5e123e67)
+- 6th page - ![image](https://github.com/user-attachments/assets/3a11f292-1b45-4b6d-a09c-00141e744390) ![image](https://github.com/user-attachments/assets/15127529-62c3-481b-bd9c-199c4e78af19)
+
+
+- 7th page - ![image](https://github.com/user-attachments/assets/9f3e4311-6dd9-4ad7-ab7e-490ea5161d3a)
+
+- 8th page -![image](https://github.com/user-attachments/assets/d5f81f20-54f5-4b80-afee-999a63526141)
+
+- 9th page - ![image](https://github.com/user-attachments/assets/59b9e0b5-795a-431e-9f81-ee720192ba2f)
+
+- 10th page - ![image](https://github.com/user-attachments/assets/ac02ab26-9dd8-4ee2-b9a4-af9ca7f72551)
+
+- 11th page -![image](https://github.com/user-attachments/assets/7b321917-c7ae-4b43-9b27-400a20709ad6)
+
+- 12th page - ![image](https://github.com/user-attachments/assets/780c0d08-2e12-4a65-8930-8e977769ee72)
+
 
   
 
