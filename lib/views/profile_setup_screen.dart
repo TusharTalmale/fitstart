@@ -58,54 +58,83 @@ class ProfileSetupScreen extends StatelessWidget {
   }
 
   // Common Back/Next button row
- Widget _buildNavigationButtons(ProfileSetupViewModel controller, bool isSubmit) {
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.end,
-    children: [
-      // Back Button
-      Expanded(
-        child: ElevatedButton.icon(
-          onPressed: controller.previousPage,
-          icon: const Icon(Icons.arrow_back, color: Colors.limeAccent),
-          label: const Text("Back", style: TextStyle(color: Colors.limeAccent)),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey[850],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
+  // 
+  //,
+  // 
+  //
+ Widget _buildNavigationButtons(
+    ProfileSetupViewModel controller,
+    bool isSubmit,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Using Expanded to make buttons flexible and of equal width
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              controller.previousPage();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF3B3B3B), // Dark gray
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            elevation: 0,
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.chevron_left, color: Color(0xFFCCFF00)),
+                SizedBox(width: 8),
+                Text(
+                  'Back',
+                  style: TextStyle(
+                      color: Color(0xFFCCFF00),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      const SizedBox(width: 12),
-
-      // Next / Submit Button
-      Expanded(
-        child: ElevatedButton.icon(
-          onPressed: isSubmit ? controller.submitProfile : controller.nextPage,
-          icon: const Icon(Icons.arrow_forward, color: Colors.black),
-          label: Text(
-            isSubmit ? "Submit" : "Next",
-            style: const TextStyle(color: Colors.black),
-          ),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.limeAccent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
+        const SizedBox(width: 20),
+        // Next or Submit Button
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {
+              isSubmit ? controller.submitProfile() : controller.nextPage();
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFCCFF00), // Neon green
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 16),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 14),
-            elevation: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  isSubmit ? 'Submit' : 'Next',
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 8),
+                const Icon(Icons.chevron_right, color: Colors.black , ),
+              ],
+            ),
           ),
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 
   // --- UI FOR EACH PAGE ---
 
-  // Page 1: Fill Your Profile
+  // Page 1: Fill Your Profile (Corrected with Scrolling)
   Widget _buildProfileFormPage(ProfileSetupViewModel controller) {
     final inputDecoration = InputDecoration(
       filled: true,
@@ -118,183 +147,192 @@ class ProfileSetupScreen extends StatelessWidget {
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
     );
 
+    // We use a LayoutBuilder and SingleChildScrollView to prevent overflow
+    // while keeping the navigation buttons at the bottom.
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: Image.asset('assets/images/kettlebell_logo.png', height: 50),
-          ),
-          const SizedBox(height: 20),
-          Center(
-            child: Text(
-              "Fill Your Profile",
-              style: TextStyle(
-                color: AppColors.primaryColor,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Center(
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                const CircleAvatar(
-                  radius: 50,
-                  // backgroundImage: AssetImage('assets/images/profile.png'),
-                  backgroundColor: AppColors.cardBackground,
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primaryColor,
-                  ),
-                  padding: const EdgeInsets.all(4),
-                  child: const Icon(Icons.edit, size: 18, color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // First + Last Name
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: controller.firstNameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: inputDecoration.copyWith(hintText: "First Name"),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: TextField(
-                  controller: controller.lastNameController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: inputDecoration.copyWith(hintText: "Last Name"),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-
-          // Email
-          TextField(
-            controller: controller.emailController,
-            style: const TextStyle(color: Colors.white),
-            decoration: inputDecoration.copyWith(hintText: "Email"),
-          ),
-          const SizedBox(height: 12),
-
-          // Phone number
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.grey[800],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Row(
-              children: [
-                const SizedBox(width: 16),
-                const Text("+91", style: TextStyle(color: Colors.white)),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                    controller: controller.phoneController,
-                    keyboardType: TextInputType.phone,
-                    style: const TextStyle(color: Colors.white),
-                    decoration: const InputDecoration(
-                      hintText: 'Phone Number',
-                      hintStyle: TextStyle(color: Colors.white),
-                      border: InputBorder.none,
+          // Make the main content area scrollable
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20), // Top padding
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Image.asset(
+                      'assets/images/kettlebell_logo.png',
+                      height: 50,
                     ),
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 6),
-                  decoration: const BoxDecoration(
-                    color: AppColors.primaryColor,
-                    shape: BoxShape.circle,
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Text(
+                      "Fill Your Profile",
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_forward, color: Colors.black),
-                    onPressed: () {
-                      // TODO: Implement send OTP logic
-                    },
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        const CircleAvatar(
+                          radius: 50,
+                          backgroundColor: AppColors.cardBackground,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.primaryColor,
+                          ),
+                          padding: const EdgeInsets.all(4),
+                          child: const Icon(
+                            Icons.edit,
+                            size: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
+                  const SizedBox(height: 20),
 
-          // OTP
-          TextField(
-            controller: controller.otpController,
-            style: const TextStyle(color: Colors.white),
-            decoration: inputDecoration.copyWith(hintText: "OTP"),
-          ),
-          const SizedBox(height: 12),
-
-          // T&C and Resend
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
+                  // First + Last Name
                   Row(
                     children: [
-                      Obx(
-                        () => Checkbox(
-                          value: controller.termsAccepted.value,
-                          onChanged: (value) {
-                            controller.termsAccepted.value = value ?? false;
-                          },
+                      Expanded(
+                        child: TextField(
+                          controller: controller.firstNameController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: inputDecoration.copyWith(
+                            hintText: "First Name",
+                          ),
                         ),
                       ),
-                      const Text(
-                        "T&C",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: TextField(
+                          controller: controller.lastNameController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: inputDecoration.copyWith(
+                            hintText: "Last Name",
+                          ),
+                        ),
                       ),
                     ],
                   ),
+                  const SizedBox(height: 12),
+
+                  // Email
+                  TextField(
+                    controller: controller.emailController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: inputDecoration.copyWith(hintText: "Email"),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // Phone number (assuming it's part of the form)
+                  TextField(
+                    controller: controller.phoneController,
+                    keyboardType: TextInputType.phone,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: inputDecoration.copyWith(
+                      hintText: "Phone Number",
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // OTP
+                  TextField(
+                    controller: controller.otpController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: inputDecoration.copyWith(hintText: "OTP"),
+                  ),
+                  const SizedBox(height: 12),
+
+                  // T&C and Resend
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Checkbox(value: true, onChanged: null),
-                      const Text(
-                        "PRIVACY POLICY",
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Obx(
+                                () => Checkbox(
+                                  value: controller.termsAccepted.value,
+                                  onChanged: (value) {
+                                    controller.termsAccepted.value =
+                                        value ?? false;
+                                  },
+                                ),
+                              ),
+                              const Text(
+                                "T&C",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Obx(
+                                () => Checkbox(
+                                  value: controller.privacyAccepted.value,
+                                  onChanged: (value) {
+                                    controller.privacyAccepted.value =
+                                        value ?? false;
+                                  },
+                                ),
+                              ),
+                              const Text(
+                                "Privacy",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          /* Resend OTP logic */
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.only(top: 12),
+                          child: Text(
+                            "RESEND OTP",
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
-              const Spacer(),
-              GestureDetector(
-                onTap: () {
-                  // TODO: Resend OTP logic
-                },
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 12),
-                  child: Text(
-                    "RESEND OTP",
-                    style: TextStyle(
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-          Spacer(),
-          _buildNavigationButtons(controller ,false),
+          // Keep the navigation buttons fixed at the bottom
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: _buildNavigationButtons(controller, false),
+          ),
         ],
       ),
     );
@@ -351,7 +389,7 @@ class ProfileSetupScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          _buildNavigationButtons(controller ,false),
+          _buildNavigationButtons(controller, false),
         ],
       ),
     );
@@ -435,39 +473,41 @@ class ProfileSetupScreen extends StatelessWidget {
   }
 
   // Page 4: Weight Selector
-Widget _buildWeightPage(ProfileSetupViewModel controller) {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      const SizedBox(height: 40),
-      const Text(
-        "What's your weight?",
-        style: TextStyle(
-          color: AppColors.primaryColor,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
+  Widget _buildWeightPage(ProfileSetupViewModel controller) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(height: 40),
+        const Text(
+          "What's your weight?",
+          style: TextStyle(
+            color: AppColors.primaryColor,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
-      Text(
-        "You can change this later",
-        style: TextStyle(
-          color: AppColors.primaryColor.withOpacity(0.7),
-          fontSize: 14,
+        Text(
+          "You can change this later",
+          style: TextStyle(
+            color: AppColors.primaryColor.withOpacity(0.7),
+            fontSize: 14,
+          ),
         ),
-      ),
-      const Spacer(),
-HorizontalNumberPicker(
-  min: 10,
-  max: 200,
-  initialValue: controller.selectedWeight.value,
-  onChanged: (w) => controller.selectedWeight.value = w,
-),
+        const Spacer(),
 
-      const Spacer(),
-      _buildNavigationButtons(controller ,false),
-    ],
-  );
-}
+        // Weight Picker Section
+        NumberSelector(
+          minValue: 40,
+          maxValue: 120,
+          initialValue: controller.selectedWeight.value,
+          onChanged: (w) => controller.selectedWeight.value = w,
+        ),
+
+        const Spacer(),
+        _buildNavigationButtons(controller, false),
+      ],
+    );
+  }
 
   // Page 5: Height Selector
   Widget _buildHeightPage(ProfileSetupViewModel controller) {
@@ -509,17 +549,17 @@ HorizontalNumberPicker(
     required String subtitle,
     required List<String> options,
     required bool isMultiSelect,
-    required bool isSubmit ,
+    required bool isSubmit,
   }) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          SizedBox(height: 40,),
+          SizedBox(height: 40),
           Text(
             title,
             style: const TextStyle(
-              color:  AppColors.primaryColor,
+              color: AppColors.primaryColor,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
@@ -561,7 +601,7 @@ HorizontalNumberPicker(
             ),
           ),
           const Spacer(),
-          _buildNavigationButtons(controller ,isSubmit),
+          _buildNavigationButtons(controller, isSubmit),
         ],
       ),
     );
@@ -620,7 +660,7 @@ HorizontalNumberPicker(
           "Choose your regular activity level. This will help us to personalize plans for you.",
       options: ['Workout', 'Sports', 'Activities'],
       isMultiSelect: true,
-      isSubmit: true ,
+      isSubmit: true,
     );
   }
 
@@ -633,7 +673,6 @@ HorizontalNumberPicker(
     required Widget Function(BuildContext, int) itemBuilder,
     required void Function(int) onSelectedItemChanged,
     required int initialItem,
-    
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -671,7 +710,7 @@ HorizontalNumberPicker(
               ),
             ),
           ),
-          _buildNavigationButtons(controller , false),
+          _buildNavigationButtons(controller, false),
         ],
       ),
     );

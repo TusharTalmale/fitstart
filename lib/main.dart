@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'views/onboarding_screen.dart';
 
 void main() {
-  // runApp(const MyApp());
+  runApp(const MyApp());
      runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -30,14 +30,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'Helvetica', // Example font to match design
+        fontFamily: 'Helvetica', 
       ),
        initialRoute: '/splash',
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/onboarding', page: () => const OnboardingScreen()),
          GetPage(name: '/profile-setup', page: () => const ProfileSetupScreen()),
-        GetPage(name: '/congratulations', page: () => const CongratulationsScreen())
+        GetPage(name: '/congratulations', page: () => const CongratulationsScreen()),
 
       ],
     );

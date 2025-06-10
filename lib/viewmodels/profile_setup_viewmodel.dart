@@ -14,7 +14,7 @@ class ProfileSetupViewModel extends GetxController {
   final phoneController = TextEditingController();
   final otpController = TextEditingController(); // Assuming OTP from previous screen might be used here
   var termsAccepted = false.obs;
-
+  var privacyAccepted = false.obs;
   // Page 2: Gender
   var selectedGender = ''.obs; // "Male", "Female"
 
