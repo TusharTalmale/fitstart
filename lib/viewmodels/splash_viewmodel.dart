@@ -9,9 +9,7 @@ class SplashViewModel extends GetxController {
   }
 
   void _navigateToOnboarding() {
-    print("Splash Timer started...");
     Timer(const Duration(seconds: 3), () {
-      print("Navigating to Onboarding...");
       Get.offNamed('/onboarding');
     });
   }

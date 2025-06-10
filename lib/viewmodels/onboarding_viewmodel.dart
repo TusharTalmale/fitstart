@@ -19,9 +19,9 @@ class OnboardingViewModel extends GetxController {
     final mobileNumber = mobileController.text;
     if (mobileNumber.isNotEmpty) {
       print('Getting OTP for: $mobileNumber');
-      // Example: Get.snackbar("Success", "OTP sent to $mobileNumber");
+      // Get.snackbar("Success", "OTP sent to $mobileNumber");
     } else {
-      // Example: Get.snackbar("Error", "Please enter a mobile number");
+      //  Get.snackbar("Error", "Please enter a mobile number");
     }
   }
 

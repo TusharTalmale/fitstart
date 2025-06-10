@@ -183,6 +183,13 @@ Widget _buildLoginForm(OnboardingViewModel controller) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        TextButton(onPressed: (){
+           Get.offAllNamed('/profile-setup'); 
+        }, child: Text('next pages ' , style: TextStyle(
+          color: Colors.red,
+          fontSize: 20,
+          backgroundColor: Colors.amberAccent,
+        ),)),
         const Text(
         "LET’S YOU IN",
         style: TextStyle(

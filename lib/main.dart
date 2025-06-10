@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:fitstart/views/congratulations_screen.dart';
 import 'package:fitstart/views/profile_setup_screen.dart';
 import 'package:fitstart/views/splash_screen.dart';
 import 'package:flutter/foundation.dart';
@@ -35,7 +36,9 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/onboarding', page: () => const OnboardingScreen()),
-         GetPage(name: '/profile-setup', page: () => const ProfileSetupScreen())
+         GetPage(name: '/profile-setup', page: () => const ProfileSetupScreen()),
+        GetPage(name: '/congratulations', page: () => const CongratulationsScreen())
+
       ],
     );
   }
