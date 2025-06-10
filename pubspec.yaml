@@ -69,6 +69,7 @@ flutter:
     - assets/images/startpage/page1.png
     - assets/images/startpage/page2.png
     - assets/images/startpage/page3.png
+    - assets/images/startpage/congratulation.png
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 

@@ -1,3 +1,6 @@
+
+
+import 'package:fitstart/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CongratulationsScreen extends StatelessWidget {
@@ -6,47 +9,41 @@ class CongratulationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: AppColors.background, 
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0), 
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center, 
               children: [
-                // Decorative Confetti-like icons
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  alignment: WrapAlignment.center,
-                  children: const [
-                    Icon(Icons.emoji_objects, color: Colors.limeAccent),
-                    Icon(Icons.star, color: Colors.white),
-                    Icon(Icons.circle, size: 12, color: Colors.limeAccent),
-                    Icon(Icons.star_border, color: Colors.limeAccent),
-                    Icon(Icons.emoji_objects, color: Colors.white),
-                    Icon(Icons.star, color: Colors.limeAccent),
-                    Icon(Icons.circle, size: 12, color: Colors.white),
-                    Icon(Icons.star_border, color: Colors.white),
-                  ],
+                
+                Image.asset(
+                  'assets/images/startpage/congratulation.png',
+                  height: 85, 
+                  fit: BoxFit.contain,
                 ),
-                const SizedBox(height: 40),
-
+                const SizedBox(height: 25),
                 const Text(
                   "Congratulation",
+                  textAlign: TextAlign.center, // Center text horizontally
                   style: TextStyle(
-                    color: Colors.limeAccent,
-                    fontSize: 24,
+                    color: AppColors.primaryColor, 
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 10),
-
-                const Text(
-                  "Your Profile Has Been Created!",
-                  style: TextStyle(
-                    color: Colors.limeAccent,
-                    fontSize: 14,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0), 
+                  child: Text(
+                    "Your Profile \n Has Been Created!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                     
+                      color: AppColors.primaryColor.withOpacity(0.8),
+                      fontSize: 27, 
+                    ),
                   ),
                 ),
               ],
